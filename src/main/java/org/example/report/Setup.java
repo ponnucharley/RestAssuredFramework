@@ -10,8 +10,10 @@ import java.util.Arrays;
 
 public class Setup implements ITestListener {//ITestListener is an interface
     public static ExtentReports extentReports;
-    public static ExtentTest extentTest;
+    //public static ExtentTest extentTest;
+    public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
     public void onStart(ITestContext context) {
+
         extentReports= ExtentReportManager.createInstance();
     }
 
@@ -21,12 +23,14 @@ public class Setup implements ITestListener {//ITestListener is an interface
     }
 
     public  void onTestStart(ITestResult result) {
-        extentTest= extentReports.createTest(result.getMethod().getMethodName());
+        ExtentTest test = extentReports.createTest(result.getMethod().getMethodName());
+        extentTest.set(test);
+
 
     }
     public void onTestFailure(ITestResult result) {
         ExtentReportManager.logFail(result.getThrowable().getMessage());
-        String stackTrace = Arrays.toString(result.getThrowable().getStackTrace());
+        String stackTrace = Arrays.toString(result.getThrowable().getStackTrace());//code to get complete error if test gets failed
         stackTrace=stackTrace.replaceAll(",","<br>");
         ExtentReportManager.logFail(stackTrace);
     }

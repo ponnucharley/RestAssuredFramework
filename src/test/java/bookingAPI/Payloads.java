@@ -1,5 +1,8 @@
 package bookingAPI;
 
+import bookingAPI.pojo.BookingDates;
+import bookingAPI.pojo.CreateBooking;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -36,4 +39,29 @@ public class Payloads {
         data.put("additionalneeds","Breakfast");
         return data;
     }
+
+public static CreateBooking getCreateBookingPayloadAsPojo(String fname,String lname)
+{
+    BookingDates bookingDates = BookingDates.builder().checkin("2018-01-01").checkout("2019-01-01").build();
+    CreateBooking createBooking= new CreateBooking().toBuilder()
+            .firstname(fname)
+            .lastname(lname)
+            .bookingdates(bookingDates)
+            .build();//totalprice ,deposit paid and additionalneeds are hardcoded from pojo class,fname$lname paased from fakerclass
+    return createBooking;
+
+}
+    public static CreateBooking getCreateBookingPayloadAsPojo(String fname,String lname,String totalprice)
+    {
+        BookingDates bookingDates = BookingDates.builder().checkin("2018-01-01").checkout("2019-01-01").build();
+        CreateBooking createBooking= new CreateBooking().toBuilder()
+                .firstname(fname)
+                .lastname(lname)
+                .totalprice(totalprice)
+                .bookingdates(bookingDates)
+                .build();
+        return createBooking;
+
+    }
+
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class BookingAPI {
 
-    public static Response createBooking(Map<String,Object> payload)
+    public static Response createBooking(Object payload)
     {
         String baseUri= Base.dataFromJsonFile.get("endpoint").toString();
         Map<String,String> header = new HashMap<>();

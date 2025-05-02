@@ -26,24 +26,24 @@ public static ExtentReports extentReports;
 
     public static void logPass(String log)
     {
-        Setup.extentTest.pass(MarkupHelper.createLabel(log, ExtentColor.GREEN));//display pass msg in green
+        Setup.extentTest.get().pass(MarkupHelper.createLabel(log, ExtentColor.GREEN));//display pass msg in green
     }
     public static void logFail(String log)
     {
-        Setup.extentTest.fail(MarkupHelper.createLabel(log, ExtentColor.RED));
+        Setup.extentTest.get().fail(MarkupHelper.createLabel(log, ExtentColor.RED));
     }
     public static void logInfo(String log)
     {
-        Setup.extentTest.info(MarkupHelper.createLabel(log, ExtentColor.GREY));
+        Setup.extentTest.get().info(MarkupHelper.createLabel(log, ExtentColor.GREY));
     }
     public static void logJson(String json)
     {
-        Setup.extentTest.info(MarkupHelper.createCodeBlock(json, CodeLanguage.JSON));
+        Setup.extentTest.get().info(MarkupHelper.createCodeBlock(json, CodeLanguage.JSON));
     }
     public static void logHeaders(List<Header> headerList)
     {
         String[][]headers= headerList.stream().map(header -> new String[]{header.getName(), header.getValue()})
                 .toArray(String[][]::new );
-        Setup.extentTest.info(MarkupHelper.createTable(headers));
+        Setup.extentTest.get().info(MarkupHelper.createTable(headers));
     }
 }

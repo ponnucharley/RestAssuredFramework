@@ -17,6 +17,7 @@ public class RestUtils {
 
     }
 
+
     public static Response performPost(String baseUri, Map<String, Object> body, Map<String, String> header) {
         RequestSpecification requestSpecification = getRequestSpecification(baseUri, body, header);
 
@@ -26,6 +27,15 @@ public class RestUtils {
 
         return response;
 
+    }
+    public static Response performPost(String baseUri, Object body, Map<String, String> header) {
+        RequestSpecification requestSpecification = getRequestSpecification(baseUri, body, header);
+
+        Response response = requestSpecification.post();
+        printRequestlogInReport(requestSpecification);
+        printResponseLogInReport(response);
+
+        return response;
     }
 
     private static RequestSpecification getRequestSpecification(String baseUri, Object body, Map<String, String> header) {
@@ -37,6 +47,7 @@ public class RestUtils {
                 .body(body);
 
     }
+
 
     private static void printResponseLogInReport(Response response) {
         ExtentReportManager.logInfo("Status code is " + response.getStatusCode());
